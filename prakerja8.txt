@@ -1,1 +1,2 @@
 Ini dari folder remote
+Ini dari folder cloning
