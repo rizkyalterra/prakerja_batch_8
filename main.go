@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"prakerja8/configs"
 	"prakerja8/routes"
 
@@ -9,12 +10,21 @@ import (
 )
 
 func main(){
-	loadEnv()
+	// loadEnv()
 	configs.InitDatabase()
 	e := echo.New()
 	routes.InitRoute(e)
-	e.Start(":8080")
+	
+	e.Start(getPort())
 }
+
+func getPort() string {
+	if envPort := os.Getenv("PORT"); envPort != "" {
+	  return ":" + envPort
+	}
+	return ":8080"
+  }
+  
 
 func loadEnv(){
 	err := godotenv.Load()
